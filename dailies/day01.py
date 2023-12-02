@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """ Functions to solve the Day One challenges. """
 
+TITLE = "Trebuchet?!"
+
 numbers = {
     1: "one",
     2: "two",
@@ -14,24 +16,24 @@ numbers = {
 }
 
 
-def get_first_digit(line):
-    """ Return the first digit to occur in the line. """
+def get_first_digit(line: str) -> str:
+    """Return the first digit to occur in the line."""
     for char in line:
         if char.isdigit():
             return char
     raise ValueError("Digit not found")
 
 
-def get_last_digit(line):
-    """ Return the last digit to occur in the line. """
+def get_last_digit(line: str) -> str:
+    """Return the last digit to occur in the line."""
     for char in line[::-1]:
         if char.isdigit():
             return char
     raise ValueError("Digit not found")
 
 
-def get_first_number(line):
-    """ Return the first digit or number string to occur in the line. """
+def get_first_number(line: str) -> str:
+    """Return the first digit or number string to occur in the line."""
     for i, char in enumerate(line):
         if char.isdigit():
             return char
@@ -41,8 +43,8 @@ def get_first_number(line):
     raise ValueError("Number not found")
 
 
-def get_last_number(line):
-    """ Return the last digit or number string to occur in the line. """
+def get_last_number(line: str) -> str:
+    """Return the last digit or number string to occur in the line."""
     for i, char in enumerate(line[::-1]):
         if char.isdigit():
             return char
@@ -54,8 +56,8 @@ def get_last_number(line):
     raise ValueError("Number not found")
 
 
-def part_one(data):
-    """ Calculate the results for Part One. """
+def part_one(data: list[str]) -> int:
+    """Calculate the results for Part One."""
     total = 0
     for line in data:
         first = get_first_digit(line)
@@ -66,8 +68,8 @@ def part_one(data):
     return total
 
 
-def part_two(data):
-    """ Calculate the results for Part Two. """
+def part_two(data: list[str]) -> int:
+    """Calculate the results for Part Two."""
     total = 0
     for line in data:
         first = get_first_number(line.strip())
