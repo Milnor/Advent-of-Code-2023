@@ -30,7 +30,7 @@ def main():
         # Correct answers... for if I write unit tests
         # Day 01    54953, 53868
         # Day 02    2416, 63307
-        # Day 03    TBD, TBD
+        # Day 03    544664, 84495585
 
 
 if __name__ == "__main__":
