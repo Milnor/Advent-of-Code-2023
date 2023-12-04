@@ -2,7 +2,7 @@
 """ Load daily challenges and display results. """
 
 from pathlib import Path
-from dailies import day01, day02, day03
+from dailies import day01, day02, day03, day04
 
 
 def import_challenge_data(path: Path) -> list[str]:
@@ -14,7 +14,7 @@ def import_challenge_data(path: Path) -> list[str]:
 def main():
     """Display results for each challenge."""
 
-    challenges = [day01, day02, day03]
+    challenges = [day01, day02, day03, day04]
 
     for i, day in enumerate(challenges, 1):
         # TODO: format string for leading zero
@@ -31,6 +31,7 @@ def main():
         # Day 01    54953, 53868
         # Day 02    2416, 63307
         # Day 03    544664, 84495585
+        # Day 04    26426, 6227972
 
 
 if __name__ == "__main__":
