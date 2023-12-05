@@ -3,8 +3,29 @@
 
 TITLE = "If You Give A Seed A Fertilizer"
 
+class Converter:
+    """Stores lookup data to convert seed to soil, etc."""
+
+    def __init__(self, name):
+        self.name = name
+        self.mappings = []
+    
+    def add_mapping(self, dest: int, source: int, length: int) -> None:
+        """Add a dest, source, length tuple to self.mappings list."""
+        self.mappings.append((source, dest, length))
+
+    def lookup(self, input: int) -> int:
+        """Convert seed to soil, soil to fertilizer, etc."""
+        for src, dst, length in self.mappings:
+            if input >= src and input <= src + length:
+                print(f"lookup({input}) --> {dst + (input - src)}")
+                return dst + (input - src)
+        
+        # Or no explicit mapping exists
+        return input
+"""
 def location_lookup(seed: int, **converters) -> int:
-    """Find the location of a seed."""
+    #Find the location of a seed.
     #print(kwargs)
     soil = converters["seed_to_soil"][seed] if seed in converters["seed_to_soil"].keys() else seed
     fertilizer = converters["soil_to_fertilizer"][soil] if soil in converters["soil_to_fertilizer"].keys()  else soil
@@ -15,11 +36,26 @@ def location_lookup(seed: int, **converters) -> int:
     location = converters["humidity_to_location"][humdity] if humdity in converters["humidity_to_location"].keys() else humdity
     print(f"{seed=} {soil=} {fertilizer=} {water=} {light=} {temp=} {humdity=} {location=}")
     return location
+"""
+
+def location_lookup(seed: int, converters: list[Converter]):
+    """Find the location of a seed."""
+    soil = converters["soil"].lookup(seed)
+    fertilizer = converters["fertilizer"].lookup(soil)
+    water = converters["water"].lookup(fertilizer)
+    light = converters["light"].lookup(water)
+    temperature = converters["temperature"].lookup(light)
+    humdity = converters["humidity"].lookup(temperature)
+    location = converters["location"].lookup(humdity)
+    print(f"{seed=} {soil=} {fertilizer=} {water=} {light=} {temperature=} {humdity=} {location=}")
+    return location
 
 def part_one(data: list[str]) -> int:
     """Calculate the results for Part One."""
 
     seeds = [] # ints
+    converters = {} # Converters
+    """
     seed_to_soil = {} # int: int
     soil_to_fertilizer = {}
     fertilizer_to_water = {}
@@ -27,7 +63,7 @@ def part_one(data: list[str]) -> int:
     light_to_temp = {}
     temp_to_humidity = {}
     humidity_to_location = {}
-
+    """
     current_map = None
 
     for line in data:
@@ -38,24 +74,32 @@ def part_one(data: list[str]) -> int:
             seeds = [int(i) for i in raw_seeds]
         elif line.startswith("seed-to-soil map"):
             # arbitrary number of lines with digits
-            current_map = seed_to_soil
+            current_map = Converter("seed-to-soil")
+            converters["soil"] = current_map
         elif line.startswith("soil-to-fertilizer map"):
-            current_map = soil_to_fertilizer
+            current_map = Converter("soil-to-fertilizer")
+            converters["fertilizer"] = current_map
         elif line.startswith("fertilizer-to-water map"):
-            current_map = fertilizer_to_water
+            current_map = Converter("fertilizer-to-water")
+            converters["water"] = current_map
         elif line.startswith("water-to-light map"):
-            current_map = water_to_light
+            current_map = Converter("water-to-light")
+            converters["light"] = current_map
         elif line.startswith("light-to-temperature map"):
-            current_map = light_to_temp
+            current_map = Converter("light-to-temperature")
+            converters["temperature"] = current_map
         elif line.startswith("temperature-to-humidity"):
-            current_map = temp_to_humidity
+            current_map = Converter("temperatore-to-humidity")
+            converters["humidity"] = current_map
         elif line.startswith("humidity-to-location map"):
-            current_map = humidity_to_location
+            current_map = Converter("humidity-to-location")
+            converters["location"] = current_map
         elif line[0].isdigit():
             # Order is destination, source, length
             dst, src, length = line.split()
-            for i in range(int(length)):
-                current_map[int(src) + i] = int(dst) + i
+            #for i in range(int(length)):
+            #    current_map[int(src) + i] = int(dst) + i
+            current_map.add_mapping(int(dst), int(src), int(length))
         elif line[0] == '\n':
             pass # ignore newlines
         else:
@@ -63,6 +107,7 @@ def part_one(data: list[str]) -> int:
     
     lowest = None
     for seed in seeds:
+        """
         location = location_lookup(seed, 
                                    seed_to_soil=seed_to_soil,
                                    soil_to_fertilizer=soil_to_fertilizer,
@@ -71,6 +116,8 @@ def part_one(data: list[str]) -> int:
                                    light_to_temp=light_to_temp,
                                    temp_to_humidity=temp_to_humidity,
                                    humidity_to_location=humidity_to_location)
+        """
+        location = location_lookup(seed, converters)
         print(f"{location=}, {lowest=}")
         if not lowest:
             lowest = location
