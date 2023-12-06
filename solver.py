@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """ Load daily challenges and display results. """
 
+import argparse
 from pathlib import Path
+
 from dailies import day01, day02, day03, day04, day05
 
 
@@ -11,14 +13,26 @@ def import_challenge_data(path: Path) -> list[str]:
         return raw_data.readlines()
 
 
-def main():
+def main(days: list[int] | None, samples: bool):
     """Display results for each challenge."""
 
-    challenges = [day01, day02, day03, day04, day05]
+    all_challenges = {1: day01, 2: day02, 3: day03, 4: day04, 5: day05}
+    challenges = []
 
-    for i, day in enumerate(challenges, 1):
+    if days:
+        # User over-rode the default of displaying all
+        for index in days:
+            challenges.append((index, all_challenges[index]))
+    else:
+        challenges = [(k, v) for k, v in all_challenges.items()]
+
+    for i, day in challenges:
         # TODO: format string for leading zero
-        data_source = Path("data") / f"day0{i}.txt"
+        if samples:
+            # the smaller example data sets
+            data_source = Path("data") / f"sample0{i}.txt"
+        else:
+            data_source = Path("data") / f"day0{i}.txt"
         challenge_data = import_challenge_data(data_source)
         one = day.part_one(challenge_data)
         two = day.part_two(challenge_data)
@@ -28,12 +42,17 @@ def main():
         print(f"Part Two: {two}\n")
 
         # Correct answers... for if I write unit tests
-        # Day 01    54953, 53868
-        # Day 02    2416, 63307
-        # Day 03    544664, 84495585
-        # Day 04    26426, 6227972
-        # Day 05    579439039, tbd
-
+        #           Challenge Data      Sample Data
+        # Day 01    54953, 53868        142, 281
+        # Day 02    2416, 63307         8, 2286
+        # Day 03    544664, 84495585    4361, 467835
+        # Day 04    26426, 6227972      13, 30
+        # Day 05    579439039, tbd      35, 46
+        # Day 06    tbd, tbd            288, tbd
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--days', type=int, nargs='+', help='Only run the specified day(s)')
+    parser.add_argument('--samples', action='store_true', help='Use smaller sample data instead of challenge data')
+    args = parser.parse_args()
+    main(args.days, args.samples)
