@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Functions to solve the Day Six challenges. """
 
-TITLE = "TBD"
+TITLE = "Wait For It"
 
 
 def part_one(data: list[str]) -> int:
