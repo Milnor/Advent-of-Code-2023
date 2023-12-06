@@ -1,13 +1,19 @@
 # 🎄 Advent-of-Code-2023 🎄
 
-* TODO: cover art, once a clear theme emerges
+![2023_Trebuchet](https://github.com/Milnor/Advent-of-Code-2023/assets/7789866/e22b85cb-0403-4c56-98bf-ac6a42c0f5c4)
+
 
 My favorite annual coding competition. Will this be the year I finally complete it?  
 
 ## Usage
-As of day 2, there are no dependencies.
+As of day 6, there are still no dependencies outside of the Python standard library.
+* Default usage will use actual challenge data and display all days completed so far.
 ```
 ./solver.py
+```
+* Alternatively, you can specify the smaller sample data sets with `--samples` and/or limit which day's puzzles are displayed with `--days X Y Z`
+```
+./solver.py --days 5 2 --samples
 ```
 
 ## Misc
