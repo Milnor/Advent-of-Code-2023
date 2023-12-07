@@ -4,7 +4,7 @@
 import argparse
 from pathlib import Path
 
-from dailies import day01, day02, day03, day04, day05
+from dailies import day01, day02, day03, day04, day05, day06
 
 
 def import_challenge_data(path: Path) -> list[str]:
@@ -16,7 +16,7 @@ def import_challenge_data(path: Path) -> list[str]:
 def main(days: list[int] | None, samples: bool):
     """Display results for each challenge."""
 
-    all_challenges = {1: day01, 2: day02, 3: day03, 4: day04, 5: day05}
+    all_challenges = {1: day01, 2: day02, 3: day03, 4: day04, 5: day05, 6: day06}
     challenges = []
 
     if days:
@@ -34,6 +34,7 @@ def main(days: list[int] | None, samples: bool):
         else:
             data_source = Path("data") / f"day0{i}.txt"
         challenge_data = import_challenge_data(data_source)
+        # TODO: inconsistent edge case where Day 1 has different sample data for Part 1 and Part 2
         one = day.part_one(challenge_data)
         two = day.part_two(challenge_data)
 
@@ -48,7 +49,8 @@ def main(days: list[int] | None, samples: bool):
         # Day 03    544664, 84495585    4361, 467835
         # Day 04    26426, 6227972      13, 30
         # Day 05    579439039, tbd      35, 46
-        # Day 06    tbd, tbd            288, tbd
+        # Day 06    500346, 42515755    288, 71503
+        # Day 07    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
