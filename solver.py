@@ -5,6 +5,7 @@ import argparse
 from pathlib import Path
 
 from rich import console as rcon
+
 console = rcon.Console()
 
 from dailies import day01, day02, day03, day04, day05, day06, day07, day08, day09
@@ -19,7 +20,17 @@ def import_challenge_data(path: Path) -> list[str]:
 def main(days: list[int] | None, samples: bool):
     """Display results for each challenge."""
 
-    all_challenges = {1: day01, 2: day02, 3: day03, 4: day04, 5: day05, 6: day06, 7: day07, 8: day08, 9: day09}
+    all_challenges = {
+        1: day01,
+        2: day02,
+        3: day03,
+        4: day04,
+        5: day05,
+        6: day06,
+        7: day07,
+        8: day08,
+        9: day09,
+    }
     challenges = []
 
     if days:
@@ -27,7 +38,7 @@ def main(days: list[int] | None, samples: bool):
         for index in days:
             challenges.append((index, all_challenges[index]))
     else:
-        challenges = [(k, v) for k, v in all_challenges.items()]
+        challenges = all_challenges.items()
 
     for i, day in challenges:
         # TODO: format string for leading zero
@@ -46,9 +57,16 @@ def main(days: list[int] | None, samples: bool):
         console.print(f"Part One: {one}")
         console.print(f"Part Two: {two}\n")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--days', type=int, nargs='+', help='Only run the specified day(s)')
-    parser.add_argument('--samples', action='store_true', help='Use smaller sample data instead of challenge data')
+    parser.add_argument(
+        "--days", type=int, nargs="+", help="Only run the specified day(s)"
+    )
+    parser.add_argument(
+        "--samples",
+        action="store_true",
+        help="Use smaller sample data instead of challenge data",
+    )
     args = parser.parse_args()
     main(args.days, args.samples)
