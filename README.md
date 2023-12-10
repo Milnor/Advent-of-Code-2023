@@ -6,7 +6,6 @@
 My favorite annual coding competition. Will this be the year I finally complete it?  
 
 ## Usage
-* As of day 7, there are still no dependencies outside of the Python standard library.
 * Supply your own puzzle input in `data/dayXX.txt` and `data/sampleXX.txt` where XX is the number of the day (with a leading zero if less than 10).
     - I saw on reddit that sharing your own input data is against the rules, so I removed it from this repo.
 * Default usage will use actual challenge data and display all days completed so far.
