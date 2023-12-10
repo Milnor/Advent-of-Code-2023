@@ -8,7 +8,7 @@ from pathlib import Path
 from rich import console as rcon
 console = rcon.Console()
 
-from dailies import day01, day02, day03, day04, day05, day06, day07, day08
+from dailies import day01, day02, day03, day04, day05, day06, day07, day08, day09
 
 
 def import_challenge_data(path: Path) -> list[str]:
@@ -20,7 +20,7 @@ def import_challenge_data(path: Path) -> list[str]:
 def main(days: list[int] | None, samples: bool):
     """Display results for each challenge."""
 
-    all_challenges = {1: day01, 2: day02, 3: day03, 4: day04, 5: day05, 6: day06, 7: day07, 8: day08}
+    all_challenges = {1: day01, 2: day02, 3: day03, 4: day04, 5: day05, 6: day06, 7: day07, 8: day08, 9: day09}
     challenges = []
 
     if days:
@@ -57,6 +57,7 @@ def main(days: list[int] | None, samples: bool):
         # Day 06    500346, 42515755        288, 71503
         # Day 07    250120186, 250665248    6440, 5905
         # Day 08    21251, 11678319315857   2|6, 6
+        # Day 09    2105961943, 1019        114, 2
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
