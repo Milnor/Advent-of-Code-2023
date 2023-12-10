@@ -4,7 +4,6 @@
 import argparse
 from pathlib import Path
 
-#from rich import print as rprint
 from rich import console as rcon
 console = rcon.Console()
 
@@ -46,18 +45,6 @@ def main(days: list[int] | None, samples: bool):
         console.print(f"--- [style align right]Day {i}: {day.TITLE} ---")
         console.print(f"Part One: {one}")
         console.print(f"Part Two: {two}\n")
-
-        # Correct answers... for if I write unit tests
-        #           Challenge Data          Sample Data
-        # Day 01    54953, 53868            142, 281
-        # Day 02    2416, 63307             8, 2286
-        # Day 03    544664, 84495585        4361, 467835
-        # Day 04    26426, 6227972          13, 30
-        # Day 05    579439039, tbd          35, 46
-        # Day 06    500346, 42515755        288, 71503
-        # Day 07    250120186, 250665248    6440, 5905
-        # Day 08    21251, 11678319315857   2|6, 6
-        # Day 09    2105961943, 1019        114, 2
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
