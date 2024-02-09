@@ -8,7 +8,7 @@ from rich import console as rcon
 
 console = rcon.Console()
 
-from dailies import day01, day02, day03, day04, day05, day06, day07, day08, day09
+from dailies import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
 
 
 def import_challenge_data(path: Path) -> list[str]:
@@ -30,6 +30,7 @@ def main(days: list[int] | None, samples: bool):
         7: day07,
         8: day08,
         9: day09,
+        10: day10,
     }
     challenges = []
 
@@ -41,12 +42,12 @@ def main(days: list[int] | None, samples: bool):
         challenges = all_challenges.items()
 
     for i, day in challenges:
-        # TODO: format string for leading zero
+
         if samples:
             # the smaller example data sets
-            data_source = Path("data") / f"sample0{i}.txt"
+            data_source = Path("data") / f"sample{i:02}.txt"
         else:
-            data_source = Path("data") / f"day0{i}.txt"
+            data_source = Path("data") / f"day{i:02}.txt"
         challenge_data = import_challenge_data(data_source)
         # TODO: inconsistent edge case where Day 1 has different sample data for Part 1 and Part 2
         #   Day 8 also has multiple sample data sets

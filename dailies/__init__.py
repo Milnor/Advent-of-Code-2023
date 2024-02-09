@@ -9,6 +9,7 @@ from .day06 import part_one, part_two, TITLE
 from .day07 import part_one, part_two, TITLE
 from .day08 import part_one, part_two, TITLE
 from .day09 import part_one, part_two, TITLE
+from .day10 import part_one, part_two, TITLE
 
 # TODO: pylint doesn't like how I did this
 
